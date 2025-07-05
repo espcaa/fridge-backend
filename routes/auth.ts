@@ -26,6 +26,7 @@ export const authRoutes = new Elysia({ prefix: "/auth" })
       success: true,
       message: "User signed up successfully",
       error: null,
+      data: data,
     };
   })
   .post("loginWithPassword", async ({ body, supabase }) => {
@@ -50,6 +51,6 @@ export const authRoutes = new Elysia({ prefix: "/auth" })
     return {
       success: true,
       message: "User logged in successfully",
-      data,
+      data: data,
     };
   });
