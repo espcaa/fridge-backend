@@ -4,6 +4,7 @@ import { supabasePlugin } from "../plugins/supabase";
 export const houseRoutes = new Elysia({ prefix: "house" })
   .use(supabasePlugin)
   .post("/createHouse", async ({ body, supabase }) => {
+    console.log("Creating house with body:", body);
     const { name, description, token } = body as {
       name: string;
       description: string;
@@ -13,6 +14,7 @@ export const houseRoutes = new Elysia({ prefix: "house" })
     let userId = "";
 
     // Check the user exists
+    console.log("Verifying user with token:", token);
     try {
       const { data, error } = await supabase.auth.getUser(token);
       if (error || !data.user) {
@@ -31,6 +33,8 @@ export const houseRoutes = new Elysia({ prefix: "house" })
         error: (error as Error).message,
       };
     }
+
+    console.log("User verified, userId:", userId);
 
     // Add the house to the database
 
