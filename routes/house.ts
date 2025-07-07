@@ -1,9 +1,9 @@
 import { Elysia } from "elysia";
 import { supabasePlugin } from "../plugins/supabase";
 
-export const houseRoutes = new Elysia({ prefix: "/house" })
+export const houseRoutes = new Elysia({ prefix: "house" })
   .use(supabasePlugin)
-  .post("/createHouse", async ({ body, supabase }) => {
+  .post("createHouse", async ({ body, supabase }) => {
     const { name, description, token } = body as {
       name: string;
       description: string;
