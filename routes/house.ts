@@ -3,7 +3,7 @@ import { supabasePlugin } from "../plugins/supabase";
 
 export const houseRoutes = new Elysia({ prefix: "house" })
   .use(supabasePlugin)
-  .post("createHouse", async ({ body, supabase }) => {
+  .post("/createHouse", async ({ body, supabase }) => {
     const { name, description, token } = body as {
       name: string;
       description: string;
@@ -145,8 +145,14 @@ export const houseRoutes = new Elysia({ prefix: "house" })
         error: error.message,
       };
     }
+
+    return {
+      message: "House retrieved successfully",
+      success: true,
+      data,
+    };
   })
-  .post("approveMember", async ({ body, supabase }) => {
+  .post("/approveMember", async ({ body, supabase }) => {
     const { houseId, userId, token } = body as {
       houseId: string;
       userId: string;
@@ -207,7 +213,7 @@ export const houseRoutes = new Elysia({ prefix: "house" })
       data,
     };
   })
-  .post("getHouseMembers", async ({ body, supabase }) => {
+  .post("/getHouseMembers", async ({ body, supabase }) => {
     const { houseId, token } = body as {
       houseId: string;
       token: string;
